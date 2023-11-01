@@ -31,3 +31,4 @@ C:\Desenvolvimento\BasketballInfo\obj\Debug\net7.0\ref\BasketballInfo.dll
 C:\Desenvolvimento\BasketballInfo\obj\Debug\net7.0\BasketballInfo.csproj.AssemblyReference.cache
 C:\Desenvolvimento\BasketballInfo\bin\Debug\net7.0\RestSharp.dll
 C:\Desenvolvimento\BasketballInfo\obj\Debug\net7.0\BasketballInfo.csproj.CopyComplete
+C:\Desenvolvimento\BasketballInfo\bin\Debug\net7.0\appsecrets.json

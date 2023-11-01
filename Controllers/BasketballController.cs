@@ -17,11 +17,23 @@ namespace BasketballInfo.Controllers
         private readonly IConfiguration _configuration;
         private readonly HttpClient _httpClient;
 
+        public BasketballController(IConfiguration configuration, HttpClient httpClient)
+        {
+            _configuration = configuration;
+            _httpClient = httpClient;
+        }
+
         public async Task<List<Game>> GetNbaGamesAsync()
         {
             try
             {
                 var apiKey = _configuration["ApiSettings:BasketballApiKey"];
+
+                if (string.IsNullOrEmpty(apiKey))
+                {
+                    throw new InvalidOperationException("Chave de API não encontrada. Verifique a configuração.");
+                }
+
                 _httpClient.DefaultRequestHeaders.Add("x-rapidapi-key", apiKey);
 
                 HttpResponseMessage response = await _httpClient.GetAsync("https://api-basketball.p.rapidapi.com/games");
