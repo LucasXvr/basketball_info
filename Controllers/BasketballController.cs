@@ -1,18 +1,15 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using BasketballInfo.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using System.Text.Json;
 
 namespace BasketballInfo.Controllers
 {
-    public interface IApiService
-    {
-        Task<List<Game>> GetNbaGamesAsync();
-    }
-
-    public class BasketballController : IApiService
+    public class BasketballController : Controller
     {
         private readonly IConfiguration _configuration;
         private readonly HttpClient _httpClient;
@@ -23,11 +20,18 @@ namespace BasketballInfo.Controllers
             _httpClient = httpClient;
         }
 
-        public async Task<List<Game>> GetNbaGamesAsync()
+        public class ResponseData
+        {
+            public List<Game> Response { get; set; }
+        }
+
+        public async Task<List<Game>> GetNbaGames()
         {
             try
             {
                 var apiKey = _configuration["ApiSettings:BasketballApiKey"];
+                var league = "12";
+                var season = "2023-2024";
 
                 if (string.IsNullOrEmpty(apiKey))
                 {
@@ -36,24 +40,54 @@ namespace BasketballInfo.Controllers
 
                 _httpClient.DefaultRequestHeaders.Add("x-rapidapi-key", apiKey);
 
-                HttpResponseMessage response = await _httpClient.GetAsync("https://api-basketball.p.rapidapi.com/games");
+                var apiUrl = $"https://api-basketball.p.rapidapi.com/games?league={league}&season={season}";
+
+                HttpResponseMessage response = await _httpClient.GetAsync(apiUrl);
 
                 if (response.IsSuccessStatusCode)
                 {
                     string content = await response.Content.ReadAsStringAsync();
-                    // Processar a resposta e mapear para objetos C# (por exemplo, List<GameModel>)
-                    // Retorne os dados processados
-                    return new List<Game>(); // Substitua isso pelo processamento real
+                    Console.WriteLine(content);
+
+                    // Use o JsonSerializer para desserializar a resposta JSON em objetos C#
+                    var options = new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true
+                    };
+
+                    var responseData = JsonSerializer.Deserialize<ResponseData>(content, options);
+
+                    if (responseData != null && responseData.Response != null)
+                    {
+                        var validGames = responseData.Response
+                            .Where(game =>
+                                game.Scores?.Home?.Total != null &&
+                                game.Scores.Away?.Total != null)
+                            .ToList();
+
+                        Console.WriteLine(validGames);
+                        return validGames;
+                    }
+                    else
+                    {
+                        // Se não houver dados válidos ou valores nulos, retorna uma lista vazia
+                        return new List<Game>();
+                    }
                 }
                 else
                 {
-                    // Lidar com erros, por exemplo, lançando uma exceção personalizada
+                    // Registre os detalhes da exceção
+                    Console.WriteLine($"Erro na requisição: {response.StatusCode}");
+                    Console.WriteLine(await response.Content.ReadAsStringAsync());
+
+                    // Lançar uma exceção personalizada ou retornar uma lista vazia
                     throw new HttpRequestException($"Erro na requisição: {response.StatusCode}");
+                    return new List<Game>();
                 }
             }
             catch (Exception ex)
             {
-                // Lidar com outras exceções, se necessário
+                Console.WriteLine(ex);
                 throw ex;
             }
         }

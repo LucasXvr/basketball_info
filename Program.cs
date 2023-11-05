@@ -1,7 +1,12 @@
+using BasketballInfo.Controllers;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Configuration.AddJsonFile("appsettings.json");
+builder.Services.AddHttpClient<BasketballController>();
+
 
 var app = builder.Build();
 
@@ -17,7 +22,6 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
 app.UseAuthorization();
 
 app.MapControllerRoute(

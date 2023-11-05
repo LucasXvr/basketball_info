@@ -1,8 +1,35 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@model List<Game>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div>
+    <h2>Jogos da NBA</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Data</th>
+                <th>Time da Casa</th>
+                <th>Time Visitante</th>
+                <th>Placar</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var game in Model)
+            {
+                <tr>
+                    <td>@game.Date</td>
+                    <td>@game.Teams.Home.Name</td>
+                    <td>@game.Teams.Away.Name</td>
+                    <td>
+                        @if (game.Scores.Home.Total.HasValue && game.Scores.Away.Total.HasValue)
+                        {
+                            <span>@game.Scores.Home.Total.Value - @game.Scores.Away.Total.Value</span>
+                        }
+                        else
+                        {
+                            <span>Placar não disponível</span>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>
