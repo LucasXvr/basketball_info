@@ -4,9 +4,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Configuration.AddJsonFile("appsettings.json");
+builder.Configuration.AddJsonFile("appsecrets.json");
 builder.Services.AddHttpClient<BasketballController>();
-
 
 var app = builder.Build();
 

@@ -5,31 +5,36 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Data</th>
+                <th>
+                    <form method="get" action="/Home/Index">
+                        <label for="selectedDate">Escolha uma data:</label>
+                        <input type="date" id="selectedDate" name="selectedDate">
+                        <input type="submit" value="Filtrar jogos">
+                    </form>
+                </th>
                 <th>Time da Casa</th>
                 <th>Time Visitante</th>
                 <th>Placar</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var game in Model)
+            @if (Model != null && Model.Count > 0)
             {
-                <tr>
-                    <td>@game.Date</td>
-                    <td>@game.Teams.Home.Name</td>
-                    <td>@game.Teams.Away.Name</td>
-                    <td>
-                        @if (game.Scores.Home.Total.HasValue && game.Scores.Away.Total.HasValue)
-                        {
-                            <span>@game.Scores.Home.Total.Value - @game.Scores.Away.Total.Value</span>
-                        }
-                        else
-                        {
-                            <span>Placar não disponível</span>
-                        }
-                    </td>
-                </tr>
+                @foreach (var game in Model)
+                {
+                    <tr>
+                        <td>@game.date.ToShortDateString()</td>
+                        <td>@game.home_team.full_name</td>
+                        <td>@game.visitor_team.full_name</td>
+                        <td>@(game.home_team_score + " - " + game.visitor_team_score)</td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <p>Não há jogos hoje.</p>
             }
         </tbody>
     </table>
+
 </div>

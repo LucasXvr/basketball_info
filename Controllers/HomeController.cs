@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using BasketballInfo.Models;
-using Microsoft.Extensions.Logging; // Adicione a diretiva necessária
+using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 
 namespace BasketballInfo.Controllers
@@ -17,19 +17,11 @@ namespace BasketballInfo.Controllers
             _basketballController = basketballController;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(DateTime? selectedDate)
         {
-            if (_basketballController != null)
-            {
-                var games = await _basketballController.GetNbaGames();
+            var games = await _basketballController.GetNbaGames(selectedDate);
 
-                return View(games);
-            }
-            else
-            {
-                // Lide com o caso em que _basketballController é nulo
-                return View("Error");
-            }
+            return View(games);
         }
 
         public IActionResult Privacy()

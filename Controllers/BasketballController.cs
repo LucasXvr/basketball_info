@@ -9,6 +9,7 @@ using System.Text.Json;
 
 namespace BasketballInfo.Controllers
 {
+
     public class BasketballController : Controller
     {
         private readonly IConfiguration _configuration;
@@ -20,18 +21,13 @@ namespace BasketballInfo.Controllers
             _httpClient = httpClient;
         }
 
-        public class ResponseData
-        {
-            public List<Game> Response { get; set; }
-        }
-
-        public async Task<List<Game>> GetNbaGames()
+        public async Task<List<Game>> GetNbaGames(DateTime? selectedDate)
         {
             try
             {
                 var apiKey = _configuration["ApiSettings:BasketballApiKey"];
-                var league = "12";
-                var season = "2023-2024";
+                var currentDate = selectedDate ?? DateTime.Now;
+                var formattedDate = currentDate.ToString("yyyy-MM-dd");
 
                 if (string.IsNullOrEmpty(apiKey))
                 {
@@ -40,7 +36,7 @@ namespace BasketballInfo.Controllers
 
                 _httpClient.DefaultRequestHeaders.Add("x-rapidapi-key", apiKey);
 
-                var apiUrl = $"https://api-basketball.p.rapidapi.com/games?league={league}&season={season}";
+                var apiUrl = $"https://free-nba.p.rapidapi.com/games?dates[]={formattedDate}";
 
                 HttpResponseMessage response = await _httpClient.GetAsync(apiUrl);
 
@@ -52,25 +48,22 @@ namespace BasketballInfo.Controllers
                     // Use o JsonSerializer para desserializar a resposta JSON em objetos C#
                     var options = new JsonSerializerOptions
                     {
-                        PropertyNameCaseInsensitive = true
+                        PropertyNameCaseInsensitive = true,
+                        PropertyNamingPolicy = JsonNamingPolicy.CamelCase, // Para corresponder ao estilo do JSON
                     };
 
-                    var responseData = JsonSerializer.Deserialize<ResponseData>(content, options);
+                    var responseData = JsonSerializer.Deserialize<Root>(content, options);
 
-                    if (responseData != null && responseData.Response != null)
+                    Console.WriteLine("Número de jogos obtidos: " + responseData?.data?.Count);
+
+                    if (responseData != null && responseData.data != null)
                     {
-                        var validGames = responseData.Response
-                            .Where(game =>
-                                game.Scores?.Home?.Total != null &&
-                                game.Scores.Away?.Total != null)
-                            .ToList();
-
-                        Console.WriteLine(validGames);
-                        return validGames;
+                        return responseData.data;
                     }
                     else
                     {
                         // Se não houver dados válidos ou valores nulos, retorna uma lista vazia
+                        Console.WriteLine("Os dados ou a lista de jogos estão nulos.");
                         return new List<Game>();
                     }
                 }
@@ -82,12 +75,11 @@ namespace BasketballInfo.Controllers
 
                     // Lançar uma exceção personalizada ou retornar uma lista vazia
                     throw new HttpRequestException($"Erro na requisição: {response.StatusCode}");
-                    return new List<Game>();
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex);
+                Console.WriteLine("Exceção capturada: " + ex);
                 throw ex;
             }
         }
