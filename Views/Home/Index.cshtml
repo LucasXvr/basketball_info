@@ -6,11 +6,13 @@
         <thead>
             <tr>
                 <th>
-                    <form method="get" action="/Home/Index">
-                        <label for="selectedDate">Escolha uma data:</label>
-                        <input type="date" id="selectedDate" name="selectedDate">
-                        <input type="submit" value="Filtrar jogos">
-                    </form>
+                    <div class="filter">
+                        <form method="get" action="/Home/Index">
+                            <label for="selectedDate">Escolha uma data:</label>
+                            <input type="date" id="selectedDate" name="selectedDate">
+                            <input type="submit" class="btn btn-dark" value="Filtrar jogos">
+                        </form>
+                    </div>
                 </th>
                 <th>Time da Casa</th>
                 <th>Time Visitante</th>

@@ -9,8 +9,8 @@
       "PackagePath": "staticwebassets\\css\\site.css"
     },
     {
-      "Id": "C:\\Desenvolvimento\\BasketballInfo\\wwwroot\\favicon.ico",
-      "PackagePath": "staticwebassets\\favicon.ico"
+      "Id": "C:\\Desenvolvimento\\BasketballInfo\\wwwroot\\images\\favicon.png",
+      "PackagePath": "staticwebassets\\images\\favicon.png"
     },
     {
       "Id": "C:\\Desenvolvimento\\BasketballInfo\\wwwroot\\js\\site.js",

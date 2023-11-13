@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "QRFPNxWfnr/VTGOZnme66FOgNddNiQc8/h59kFYNL8M=",
+  "Hash": "iYuN+MkvqiVpVB1QW9aYU4s3fz2S7mHaldrgrSb8E5I=",
   "Source": "BasketballInfo",
   "BasePath": "_content/BasketballInfo",
   "Mode": "Default",
@@ -68,12 +68,12 @@
       "OriginalItemSpec": "wwwroot\\css\\site.css"
     },
     {
-      "Identity": "C:\\Desenvolvimento\\BasketballInfo\\wwwroot\\favicon.ico",
+      "Identity": "C:\\Desenvolvimento\\BasketballInfo\\wwwroot\\images\\favicon.png",
       "SourceId": "BasketballInfo",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Desenvolvimento\\BasketballInfo\\wwwroot\\",
       "BasePath": "_content/BasketballInfo",
-      "RelativePath": "favicon.ico",
+      "RelativePath": "images/favicon.png",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -82,7 +82,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\favicon.ico"
+      "OriginalItemSpec": "wwwroot\\images\\favicon.png"
     },
     {
       "Identity": "C:\\Desenvolvimento\\BasketballInfo\\wwwroot\\js\\site.js",

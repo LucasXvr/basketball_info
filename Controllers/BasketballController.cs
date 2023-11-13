@@ -69,7 +69,7 @@ namespace BasketballInfo.Controllers
                 }
                 else
                 {
-                    // Registre os detalhes da exceção
+                    // Registra os detalhes da exceção
                     Console.WriteLine($"Erro na requisição: {response.StatusCode}");
                     Console.WriteLine(await response.Content.ReadAsStringAsync());
 
