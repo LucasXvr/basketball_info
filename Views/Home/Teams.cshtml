@@ -1,0 +1,10 @@
+<div>
+    <h2>Times da NBA</h2>
+
+    <ul>
+        @foreach (var team in Model)
+        {
+            <li>@team.full_name - @team.abbreviation</li> <!-- Corrige o acesso aos membros da classe Teams -->
+        }
+    </ul>
+</div>

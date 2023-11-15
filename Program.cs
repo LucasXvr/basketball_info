@@ -6,6 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Configuration.AddJsonFile("appsecrets.json");
 builder.Services.AddHttpClient<BasketballController>();
+builder.Services.AddHttpClient<TeamsController>();
 
 var app = builder.Build();
 
