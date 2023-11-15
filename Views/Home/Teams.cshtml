@@ -1,10 +1,39 @@
-<div>
+@model List<Teams>
+
+<style>
+    .conference-east {
+        clear: left;
+    }
+
+    .conference-west {
+        clear: right;
+    }
+</style>
+
+<div class="container mt-4">
     <h2>Times da NBA</h2>
 
-    <ul>
-        @foreach (var team in Model)
-        {
-            <li>@team.full_name - @team.abbreviation</li> <!-- Corrige o acesso aos membros da classe Teams -->
-        }
-    </ul>
+    <div style="width: 50%; float: left;">
+        <h3>Conferência Leste</h3>
+        <ul>
+            @foreach (var team in Model.Where(t => t.conference.ToLower() == "east"))
+            {
+                <li class="conference-east">
+                    @team.full_name - @team.abbreviation
+                </li>
+            }
+        </ul>
+    </div>
+
+    <div style="width: 50%; float: right;">
+        <h3>Conferência Oeste</h3>
+        <ul>
+            @foreach (var team in Model.Where(t => t.conference.ToLower() == "west"))
+            {
+                <li class="conference-west">
+                    @team.full_name - @team.abbreviation
+                </li>
+            }
+        </ul>
+    </div>
 </div>
