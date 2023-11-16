@@ -2,15 +2,17 @@
 
 <style>
     .conference-east {
-        clear: left;
+        width: 100%;
+        display: inline-block;
     }
 
     .conference-west {
-        clear: right;
+        width: 100%;
+        display: inline-block;
     }
 </style>
 
-<div class="container mt-4">
+<div class="container mt-4 mx-auto text-center">
     <h2>Times da NBA</h2>
 
     <div style="width: 50%; float: left;">
@@ -19,7 +21,7 @@
             @foreach (var team in Model.Where(t => t.conference.ToLower() == "east"))
             {
                 <li class="conference-east">
-                    @team.full_name - @team.abbreviation
+                    @team.full_name.Trim() - @team.abbreviation
                 </li>
             }
         </ul>
@@ -31,7 +33,7 @@
             @foreach (var team in Model.Where(t => t.conference.ToLower() == "west"))
             {
                 <li class="conference-west">
-                    @team.full_name - @team.abbreviation
+                    @team.full_name.Trim() - @team.abbreviation
                 </li>
             }
         </ul>

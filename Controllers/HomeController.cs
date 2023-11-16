@@ -35,7 +35,7 @@ namespace BasketballInfo.Controllers
             }
             catch (Exception ex)
             {
-                // Lide com a exceção de maneira apropriada para sua aplicação
+                // Lida com a exceção de maneira apropriada para sua aplicação
                 return View("Error"); // Crie uma visão de erro ou redirecione para outra página
             }
         }
