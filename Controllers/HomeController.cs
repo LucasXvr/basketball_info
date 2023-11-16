@@ -40,6 +40,11 @@ namespace BasketballInfo.Controllers
             }
         }
 
+        public IActionResult Discover()
+        {
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();
