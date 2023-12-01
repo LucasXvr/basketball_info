@@ -9,16 +9,17 @@ using System.Text.Json;
 
 namespace BasketballInfo.Controllers
 {
-
     public class BasketballController : Controller
     {
         private readonly IConfiguration _configuration;
         private readonly HttpClient _httpClient;
 
+
         public BasketballController(IConfiguration configuration, HttpClient httpClient)
         {
             _configuration = configuration;
             _httpClient = httpClient;
+
         }
 
         public async Task<List<Game>> GetNbaGames(DateTime? selectedDate)
@@ -58,6 +59,7 @@ namespace BasketballInfo.Controllers
 
                     if (responseData != null && responseData.data != null)
                     {
+                        // Atualiza estatísticas após obter os resultados dos jogos
                         return responseData.data;
                     }
                     else
@@ -83,5 +85,6 @@ namespace BasketballInfo.Controllers
                 throw ex;
             }
         }
+
     }
 }
