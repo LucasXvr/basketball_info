@@ -1,5 +1,6 @@
-bin
-obj
+# Pastas geradas pelo compilador .NET
+bin/
+obj/
 Properties
 .vscode
 appsecrets.json
