@@ -1,43 +1,44 @@
+@{
+    ViewData["Title"] = "Jogos da NBA -";
+}
+@model List<Game>
 <div>
-    <a href="https://www.youtube.com/watch?v=85nBQ_AoRwk" target="_blank" class="memory">
-        <small>17 de junho de 2010 </small>
-        <div>
-            <img src="/images/Kobe.jpg" alt="Kobe Bryant">
-        </div>
-        <h1>Kobe Bryant 5th Championship</h1>
-        <p>
-            At vero eos et accusamus et iusto odio dignissimos ducimus qui
-            blanditiis praesentium voluptatum deleniti atque corrupti quos dolores
-            et quas molestias excepturi sint occaecati cupiditate non provident,
-            similique...
-        </p>
-    </a>
+    <h2>Jogos da NBA</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    <div class="filter">
+                        <form method="get" action="/Home/Discover">
+                            <label for="selectedDate">Escolha uma data:</label>
+                            <input type="date" id="selectedDate" name="selectedDate">
+                            <input type="submit" class="btn btn-dark" value="Filtrar jogos">
+                        </form>
+                    </div>
+                </th>
+                <th>Time da Casa</th>
+                <th>Time Visitante</th>
+                <th>Placar</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Count > 0)
+            {
+                @foreach (var game in Model)
+                {
+                                    <tr>
+                                        <td>@game.date.ToShortDateString()</td>
+                                        <td>@game.home_team.full_name</td>
+                                        <td>@game.visitor_team.full_name</td>
+                                        <td>@(game.home_team_score + " - " + game.visitor_team_score)</td>
+                                    </tr>
+                }
+            }
+            else
+            {
+                        <p>Não há jogos hoje.</p>
+            }
+        </tbody>
+    </table>
 
-    <a href="https://www.youtube.com/watch?v=Tp7VyzrbYpM" target="_blank" class="memory">
-        <small>28 de Março de 2003</small>
-        <div>
-            <img src="/images/MichaelAndKobe.jpg" alt="Kobe Bryant">
-        </div>
-        <h1>Kobe Bryant vs Michael Jordan Highlights</h1>
-        <p>
-            At vero eos et accusamus et iusto odio dignissimos ducimus qui
-            blanditiis praesentium voluptatum deleniti atque corrupti quos dolores
-            et quas molestias excepturi sint occaecati cupiditate non provident,
-            similique...
-        </p>
-    </a>
-
-    <a href="https://www.youtube.com/watch?v=rN17J-KMWnY" target="_blank" class="memory">
-        <small> 21 de junho de 2012</small>
-        <div>
-            <img src="/images/LebronJamesMiami.jpg" alt="Kobe Bryant">
-        </div>
-        <h1>LeBron James GREATEST Game EVER? Full Game 6 Highlights vs Celtics</h1>
-        <p>
-            At vero eos et accusamus et iusto odio dignissimos ducimus qui
-            blanditiis praesentium voluptatum deleniti atque corrupti quos dolores
-            et quas molestias excepturi sint occaecati cupiditate non provident,
-            similique...
-        </p>
-    </a>
 </div>

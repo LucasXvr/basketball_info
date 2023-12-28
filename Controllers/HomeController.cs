@@ -19,11 +19,9 @@ namespace BasketballInfo.Controllers
             _teamsController = teamsController;
         }
 
-        public async Task<IActionResult> Index(DateTime? selectedDate)
+        public IActionResult Index()
         {
-            var games = await _basketballController.GetNbaGames(selectedDate);
-
-            return View(games);
+            return View();
         }
 
         public async Task<IActionResult> Teams()
@@ -40,9 +38,11 @@ namespace BasketballInfo.Controllers
             }
         }
 
-        public IActionResult Discover()
+        public async Task<IActionResult> Discover(DateTime? selectDate)
         {
-            return View();
+            var game = await _basketballController.GetNbaGames(selectDate);
+
+            return View(game);
         }
         public IActionResult Privacy()
         {
