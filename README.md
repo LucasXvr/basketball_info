@@ -8,14 +8,6 @@ O BasktBallInfo é uma plataforma desenvolvida em ASP.NET para visualização de
 ![Página de Times](wwwroot/screenshots/PaginaTimes.png)
 ![Página de Jogos da NBA](wwwroot/screenshots/PaginaJogos.png)
 
-<!--
-![Adicionar Veículos](wwwroot/screenshots/AdicionarVeiculos.png)
-![Detalhes 01](wwwroot/screenshots/Detalhes01.png)
-![Detalhes 02](wwwroot/screenshots/Detalhes02.png)
-![Detalhes 03](wwwroot/screenshots/Detalhes03.png)
-![Detalhes 04](wwwroot/screenshots/Detalhes04.png)
-![Editar Página](wwwroot/screenshots/Editar.png) -->
-
 ## Tecnologias Utilizadas
 
 O projeto foi desenvolvido utilizando uma variedade de tecnologias e bibliotecas modernas para proporcionar uma experiência robusta e eficiente. Abaixo estão as principais tecnologias utilizadas em cada camada do projeto:
